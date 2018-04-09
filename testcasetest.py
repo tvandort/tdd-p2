@@ -2,9 +2,9 @@ from testcase import TestCase
 from wasrun import WasRun
 
 class TestCaseTest(TestCase):
-    def testRunning(self):
+    def testTemplateMethod(self):
         test= WasRun("testMethod")
-        assert(not test.wasRun)
         test.run()
-        assert(test.wasRun)
-TestCaseTest("testRunning").run()
+        assert("setUp testMethod tearDown " == test.log)
+
+TestCaseTest("testTemplateMethod").run()
