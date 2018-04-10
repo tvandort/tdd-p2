@@ -41,13 +41,10 @@ class TestCaseTest(TestCase):
         suite.run(self.result)
         assert("2 run, 1 failed" == self.result.summary())
 
-# tests = [f for _, f in TestCaseTest.__dict__.items() if callable(f)]
-
-# for test in tests:
-#     result= TestResult()
-#     TestCaseTest(test.__name__).run(result)
-#     print(test.__name__)
-#     print(result.summary())
+    def tearDownIfFailed(self):
+        test= WasRun("testBrokenMethod")
+        test.run(self.result)
+        print(test.log)
 
 suite= TestSuite()
 suite.add(TestCaseTest("testTemplateMethod"))
@@ -56,6 +53,7 @@ suite.add(TestCaseTest("testFailedResultFormatting"))
 suite.add(TestCaseTest("testFailedResult"))
 suite.add(TestCaseTest("testSuite"))
 suite.add(TestCaseTest("setupFailed"))
+suite.add(TestCaseTest("tearDownIfFailed"))
 
 result= TestResult()
 suite.run(result)
