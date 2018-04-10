@@ -5,6 +5,7 @@ class BrokenSetup(TestCase):
         TestCase.__init__(self, name)
 
     def setUp(self):
-        pass
+        raise Exception
+
     def testMethod(self):
         pass
