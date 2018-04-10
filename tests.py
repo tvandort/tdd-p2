@@ -1,4 +1,4 @@
-from wasrun import WasRun
+from was_run import WasRun
 
 test= WasRun("testMethod")
 print(test.wasRun)

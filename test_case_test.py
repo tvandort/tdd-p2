@@ -1,6 +1,7 @@
-from testcase import TestCase
-from wasrun import WasRun
-from testresult import TestResult
+from test_case import TestCase
+from test_result import TestResult
+from was_run import WasRun
+
 
 class TestCaseTest(TestCase):
     def testTemplateMethod(self):
@@ -24,10 +25,11 @@ class TestCaseTest(TestCase):
         result.testFailed()
         assert("1 run, 1 failed" == result.summary())
 
-TestCaseTest("testTemplateMethod").run()
-TestCaseTest("testResult").run()
+# TestCaseTest("testTemplateMethod").run()
+# TestCaseTest("testResult").run()
+# TestCaseTest("testFailedResult").run()
 
-try:
-    TestCaseTest("testFailedResult").run()
-except:
-    print('failed')
+tests = [f for _, f in TestCaseTest.__dict__.items() if callable(f)]
+
+for test in tests:
+    TestCaseTest(test.__name__).run()

@@ -1,4 +1,4 @@
-from testcase import TestCase
+from test_case import TestCase
 
 class WasRun(TestCase):
     def __init__(self, name):
