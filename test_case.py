@@ -5,8 +5,7 @@ class TestCase:
         self.name= name
 
     def setUp(self):
-        self.wasRun= None
-        self.wasSetUp= True
+        pass
 
     def tearDown(self):
         pass
@@ -15,7 +14,10 @@ class TestCase:
         result= TestResult()
         result.testStarted()
         self.setUp()
-        method = getattr(self, self.name)
-        method()
+        try:
+            method = getattr(self, self.name)
+            method()
+        except:
+            result.testFailed()
         self.tearDown()
         return result
