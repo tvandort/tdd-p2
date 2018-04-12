@@ -9,5 +9,8 @@ class TestSuite:
 
     def run(self, result):
         for test in self.tests:
-            test.run(result)
+            try:
+                test.run(result)
+            except:
+                result.testFailed()
         return result

@@ -31,7 +31,16 @@ class TestCaseTest(TestCase):
 
     def setupFailed(self):
         test= BrokenSetup("testMethod")
-        test.run(self.result)
+        try:
+            test.run(self.result)
+            assert False
+        except:
+            pass
+
+    def testSuiteContainsFailingSetup(self):
+        suite= TestSuite()
+        suite.add(BrokenSetup("testMethod"))
+        suite.run(self.result)
         assert("1 run, 1 failed" == self.result.summary())
 
     def testSuite(self):
@@ -44,16 +53,16 @@ class TestCaseTest(TestCase):
     def tearDownIfFailed(self):
         test= WasRun("testBrokenMethod")
         test.run(self.result)
-        print(test.log)
 
 suite= TestSuite()
-# suite.add(TestCaseTest("testTemplateMethod"))
-# suite.add(TestCaseTest("testResult"))
-# suite.add(TestCaseTest("testFailedResultFormatting"))
-# suite.add(TestCaseTest("testFailedResult"))
-# suite.add(TestCaseTest("testSuite"))
+suite.add(TestCaseTest("testTemplateMethod"))
+suite.add(TestCaseTest("testResult"))
+suite.add(TestCaseTest("testFailedResultFormatting"))
+suite.add(TestCaseTest("testFailedResult"))
+suite.add(TestCaseTest("testSuite"))
 suite.add(TestCaseTest("setupFailed"))
-# suite.add(TestCaseTest("tearDownIfFailed"))
+suite.add(TestCaseTest("testSuiteContainsFailingSetup"))
+suite.add(TestCaseTest("tearDownIfFailed"))
 
 result= TestResult()
 suite.run(result)

@@ -1,11 +1,12 @@
-from test_case import TestCase
+from was_run import WasRun
 
-class BrokenSetup(TestCase):
+class BrokenSetup(WasRun):
     def __init__(self, name):
-        TestCase.__init__(self, name)
+        WasRun.__init__(self, name)
 
     def setUp(self):
-        raise Exception
+        self.testBrokenMethod()
 
     def testMethod(self):
-        pass
+        print('runs the method')
+
